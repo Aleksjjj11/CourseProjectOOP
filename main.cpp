@@ -15,5 +15,6 @@ int main() {
     cout << cont.GetFirst().GetKey() << cont.GetLast().GetKey() << endl;
     cout << cont.Count() << endl;
     cout << cont[2].GetKey() << endl;
+    cout << cont["c"].GetKey() << endl;
     return 0;
 }

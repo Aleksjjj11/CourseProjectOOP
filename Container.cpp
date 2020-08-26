@@ -1,13 +1,24 @@
 #include "Container.h"
 
 Item &Container::operator[](std::string key) {
+    if (first == nullptr) {
+        printf("Container have nothing.");
+        exit(0);
+    }
+    for (int i = 0; i < Count(); i++) {
+        if ((*this)[i].GetKey() == key)
+            return (*this)[i];
+    }
 
+    printf("The key not found.");
+    exit(0);
 }
 
 Item &Container::operator[](int index) {
     if (index < 0 || index >= Count()) {
-        printf("Incorrect index");
-        exit(0); }
+        printf("Incorrect index.");
+        exit(0);
+    }
     int counter = 0;
     Item* item = first;
     while (counter < index) {
@@ -24,6 +35,8 @@ bool Container::Delete(std::string key) {
 void Container::Add(Item &item) {
     if (this->first == nullptr) {
         this->first = this->last = &item;
+        item.SetNext(nullptr);
+        item.SetPrev(nullptr);
     } else {
         this->last->SetNext(&item);
         item.SetPrev(this->last);
