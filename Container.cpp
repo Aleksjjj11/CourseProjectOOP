@@ -5,7 +5,16 @@ Item &Container::operator[](std::string key) {
 }
 
 Item &Container::operator[](int index) {
-
+    if (index < 0 || index >= Count()) {
+        printf("Incorrect index");
+        exit(0); }
+    int counter = 0;
+    Item* item = first;
+    while (counter < index) {
+        item = item->GetNext();
+        counter++;
+    }
+    return *item;
 }
 
 bool Container::Delete(std::string key) {

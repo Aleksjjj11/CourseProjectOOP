@@ -14,5 +14,6 @@ int main() {
     cont.Add(*(new Item("d")));
     cout << cont.GetFirst().GetKey() << cont.GetLast().GetKey() << endl;
     cout << cont.Count() << endl;
+    cout << cont[2].GetKey() << endl;
     return 0;
 }
