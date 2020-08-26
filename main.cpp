@@ -12,6 +12,11 @@ int main() {
     cont.Print();
     cont.Remove("b");
     cont.Print();
-    cout << cont["b"].GetKey();
+    cont.Clear();
+    cont.Print();
+    cont.Add(*(new Item("c")));
+    cont.Add(*(new Item("d")));
+    cont.Print();
+    //cout << cont["b"].GetKey();
     return 0;
 }

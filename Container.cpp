@@ -2,7 +2,7 @@
 
 Item &Container::operator[](std::string key) {
     if (first == nullptr) {
-        printf("Container have nothing.");
+        printf("Container have nothing.\n");
         exit(0);
     }
     for (int i = 0; i < Count(); i++) {
@@ -10,13 +10,13 @@ Item &Container::operator[](std::string key) {
             return (*this)[i];
     }
 
-    printf("The key not found.");
+    printf("The key not found.\n");
     exit(0);
 }
 
 Item &Container::operator[](int index) {
     if (index < 0 || index >= Count()) {
-        printf("Incorrect index.");
+        printf("Incorrect index.\n");
         exit(0);
     }
     int counter = 0;
@@ -74,7 +74,8 @@ int Container::Count() {
 }
 
 void Container::Clear() {
-
+    while (Count() > 0)
+        Remove(first->GetKey());
 }
 
 void Container::Remove(std::string key) {
@@ -107,7 +108,7 @@ void Container::Remove(std::string key) {
 
 void Container::Print() {
     if (first == nullptr) {
-        printf("Container have nothing.");
+        printf("Container have nothing.\n");
         return;
     }
     Item* item = first;
