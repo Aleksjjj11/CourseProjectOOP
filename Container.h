@@ -1,6 +1,7 @@
 #ifndef COURSEPROJECTOOP_CONTAINER_H
 #define COURSEPROJECTOOP_CONTAINER_H
 
+#include <iostream>
 #include "Item.h"
 
 class Container {
@@ -12,11 +13,14 @@ public:
     bool Delete(std::string key); //Удаление элемента по ключу
     virtual Item &operator [](std::string key); //доступ к эдементу по ключу
     virtual Item &operator [](int index); //доступ к элементу по индексу
-    Item& GetFirst() {return *first;};
-    Item& GetLast() {return *last;};
+    Item* GetFirst() {return first;};
+    Item* GetLast() {return last;};
     ~Container(); //TODO должен освободить память от всех элементов списка
     Container();
     int Count();
+    void Clear();
+    void Remove(std::string key);
+    void Print();
 };
 
 #endif //COURSEPROJECTOOP_CONTAINER_H

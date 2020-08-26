@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Container.h"
 
 using namespace std;
@@ -6,15 +5,13 @@ using namespace std;
 int main() {
     Container cont;
     cont.Add(*(new Item("b")));
-    cout << cont.GetFirst().GetKey() << cont.GetLast().GetKey() << endl;
-    cout << cont.Count() << endl;
+    cont.Print();
     cont.Add(*(new Item("c")));
-    cout << cont.GetFirst().GetKey() << cont.GetLast().GetKey() << endl;
-    cout << cont.Count() << endl;
+    cont.Print();
     cont.Add(*(new Item("d")));
-    cout << cont.GetFirst().GetKey() << cont.GetLast().GetKey() << endl;
-    cout << cont.Count() << endl;
-    cout << cont[2].GetKey() << endl;
-    cout << cont["c"].GetKey() << endl;
+    cont.Print();
+    cont.Remove("b");
+    cont.Print();
+    cout << cont["b"].GetKey();
     return 0;
 }

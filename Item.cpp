@@ -7,4 +7,6 @@ Item::Item() {
 
 Item::Item(std::string k) {
     this->key = k;
+    this->next = nullptr;
+    this->prev = nullptr;
 }

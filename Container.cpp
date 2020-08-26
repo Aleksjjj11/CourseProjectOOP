@@ -37,12 +37,19 @@ void Container::Add(Item &item) {
         this->first = this->last = &item;
         item.SetNext(nullptr);
         item.SetPrev(nullptr);
-    } else {
-        this->last->SetNext(&item);
-        item.SetPrev(this->last);
-        item.SetNext(nullptr);
-        this->last = &item;
+        return;
     }
+    if (Count() == 1) {
+        this->last = &item;
+        this->first->SetNext(&item);
+        item.SetPrev(first);
+        item.SetNext(nullptr);
+        return;
+    }
+    this->last->SetNext(&item);
+    item.SetPrev(this->last);
+    item.SetNext(nullptr);
+    this->last = &item;
 }
 
 Container::~Container() {
@@ -64,4 +71,49 @@ int Container::Count() {
         loc = loc->GetNext();
     }
     return counter;
+}
+
+void Container::Clear() {
+
+}
+
+void Container::Remove(std::string key) {
+    Item* item = &((*this)[key]);
+    //Если удаляется один единственный элемент
+    if (Count() == 1) {
+        first = last = nullptr;
+        delete &item;
+        return;
+    }
+    //Если удаляем первый элемент
+    if (item == first) {
+        first = first->GetNext();
+        first->SetPrev(nullptr);
+        delete item;
+        return;
+    }
+    //Если удаляем последний элемент
+    if (item == last) {
+        last = last->GetPrev();
+        last->SetNext(nullptr);
+        delete item;
+        return;
+    }
+    //Удаление любого другого
+    item->GetPrev()->SetNext(item->GetNext());
+    item->GetNext()->SetPrev(item->GetPrev());
+    delete &item;
+}
+
+void Container::Print() {
+    if (first == nullptr) {
+        printf("Container have nothing.");
+        return;
+    }
+    Item* item = first;
+    while (item != nullptr) {
+        std::cout << item->GetKey() << " ";
+        item = item->GetNext();
+    }
+    std::cout << std::endl;
 }
