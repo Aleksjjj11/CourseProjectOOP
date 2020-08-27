@@ -138,7 +138,20 @@ void Container::SortUp() {
 }
 
 void Container::SortDown() {
+    for (int i = 0; i < Count(); i++) {
+        for (int j = 0; j < Count() - 1; j++) {
+            Item* item1 = &(*this)[j];
+            Item* item2 = &(*this)[j+1];
+            if (item1->GetKey() < item2->GetKey()) {
+                Swap(item1, item2);
 
+                if (j == 0)
+                    this->first = item2;
+                if (j == Count() - 1)
+                    this->last = item1;
+            }
+        }
+    }
 }
 
 void Container::Swap(Item *item1, Item *item2) {

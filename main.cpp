@@ -13,6 +13,8 @@ int main() {
     cout << cont.Count() << endl;
     cont.SortUp();
     cont.Print();
+    cont.SortDown();
+    cont.Print();
     //cout << cont["b"].GetKey();
     return 0;
 }
