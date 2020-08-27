@@ -1,3 +1,4 @@
+#include <cstring>
 #include "Container.h"
 
 Item &Container::operator[](std::string key) {
@@ -16,7 +17,7 @@ Item &Container::operator[](std::string key) {
 
 Item &Container::operator[](int index) {
     if (index < 0 || index >= Count()) {
-        printf("Incorrect index.\n");
+        printf("Incorrect index. %i\n", index);
         exit(0);
     }
     int counter = 0;
@@ -117,4 +118,44 @@ void Container::Print() {
         item = item->GetNext();
     }
     std::cout << std::endl;
+}
+
+void Container::SortUp() {
+    for (int i = 0; i < Count(); i++) {
+        for (int j = 0; j < Count() - 1; j++) {
+            Item* item1 = &(*this)[j];
+            Item* item2 = &(*this)[j+1];
+            if (item1->GetKey() > item2->GetKey()) {
+                Swap(item1, item2);
+
+                if (j == 0)
+                    this->first = item2;
+                if (j == Count() - 1)
+                    this->last = item1;
+            }
+        }
+    }
+}
+
+void Container::SortDown() {
+
+}
+
+void Container::Swap(Item *item1, Item *item2) {
+    Item* med = item2->GetNext();
+    item2->SetNext(item1);
+    item1->SetNext(med);
+    if (med != nullptr)
+        med->SetPrev(item1);
+
+    med = item1->GetPrev();
+    item1->SetPrev(item2);
+    item2->SetPrev(med);
+    if (med != nullptr)
+        med->SetNext(item2);
+
+    /*if (item1->GetNext() != nullptr)
+        item1->GetNext()->SetPrev(item1);
+    if (item2->GetPrev() != nullptr)
+        item2->GetPrev()->SetNext(item2);*/
 }

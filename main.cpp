@@ -4,18 +4,14 @@ using namespace std;
 
 int main() {
     Container cont;
-    cont.Add(*(new Item("b")));
+    cont.Add(*(new Item("ab")));
     cont.Print();
-    cont.Add(*(new Item("c")));
+    cont.Add(*(new Item("ac")));
     cont.Print();
-    cont.Add(*(new Item("d")));
+    cont.Add(*(new Item("aa")));
     cont.Print();
-    cont.Remove("b");
-    cont.Print();
-    cont.Clear();
-    cont.Print();
-    cont.Add(*(new Item("c")));
-    cont.Add(*(new Item("d")));
+    cout << cont.Count() << endl;
+    cont.SortUp();
     cont.Print();
     //cout << cont["b"].GetKey();
     return 0;

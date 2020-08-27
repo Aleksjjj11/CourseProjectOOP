@@ -8,6 +8,7 @@ class Container {
 private:
     Item *first;
     Item *last;
+    void Swap(Item* item1, Item* item2);
 public:
     void Add(Item &item); //добавление элемента и его ключа
     bool Delete(std::string key); //Удаление элемента по ключу
@@ -21,6 +22,8 @@ public:
     void Clear();
     void Remove(std::string key);
     void Print();
+    void SortUp();
+    void SortDown();
 };
 
 #endif //COURSEPROJECTOOP_CONTAINER_H
