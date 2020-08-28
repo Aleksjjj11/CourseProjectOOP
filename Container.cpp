@@ -29,10 +29,6 @@ Item &Container::operator[](int index) {
     return *item;
 }
 
-bool Container::Delete(std::string key) {
-
-}
-
 void Container::Add(Item &item) {
     if (this->first == nullptr) {
         this->first = this->last = &item;
@@ -54,14 +50,14 @@ void Container::Add(Item &item) {
 }
 
 Container::~Container() {
-
+    Clear();
 }
 
 Container::Container() {
     this->first = nullptr;
     this->last = nullptr;
 }
-
+//Возвращает кол-во элементов в контейнере
 int Container::Count() {
     if (first == nullptr) return 0;
     if (first == last) return 1;
@@ -73,7 +69,7 @@ int Container::Count() {
     }
     return counter;
 }
-
+//Очищает весь список
 void Container::Clear() {
     while (Count() > 0)
         Remove(first->GetKey());
@@ -106,7 +102,7 @@ void Container::Remove(std::string key) {
     item->GetNext()->SetPrev(item->GetPrev());
     delete &item;
 }
-
+//Вывдит все элементы, нужен был для дебага
 void Container::Print() {
     if (first == nullptr) {
         printf("Container have nothing.\n");
@@ -119,7 +115,7 @@ void Container::Print() {
     }
     std::cout << std::endl;
 }
-
+//Сортирует по возрастанию
 void Container::SortUp() {
     for (int i = 0; i < Count(); i++) {
         for (int j = 0; j < Count() - 1; j++) {
@@ -136,7 +132,7 @@ void Container::SortUp() {
         }
     }
 }
-
+//Соритует по убыванию
 void Container::SortDown() {
     for (int i = 0; i < Count(); i++) {
         for (int j = 0; j < Count() - 1; j++) {
@@ -153,7 +149,7 @@ void Container::SortDown() {
         }
     }
 }
-
+//Меняет два элемента местами, с учётом смены связей каждого из них
 void Container::Swap(Item *item1, Item *item2) {
     Item* med = item2->GetNext();
     item2->SetNext(item1);
@@ -166,9 +162,27 @@ void Container::Swap(Item *item1, Item *item2) {
     item2->SetPrev(med);
     if (med != nullptr)
         med->SetNext(item2);
+}
 
-    /*if (item1->GetNext() != nullptr)
-        item1->GetNext()->SetPrev(item1);
-    if (item2->GetPrev() != nullptr)
-        item2->GetPrev()->SetNext(item2);*/
+Container &Container::operator=(Container &value) {
+    Container *result = new Container();
+    int amountContainer = value.Count(), amountFirstCont = this->Count();
+    for (int i = 0; i < amountContainer; i++) {
+        if (i < amountFirstCont) {
+            Item med = (*this)[i];
+            result->Add(med.GetKey());
+        } else {
+            Item med = value[i];
+            result->Add(med.GetKey());
+        }
+    }
+    Clear();
+    first = result->first;
+    last = result->last;
+    return *this;
+}
+//Добавляет элемент по ключу, то есть создаёт новый с полученным ключом
+void Container::Add(std::string key) {
+    Item* item = new Item(key);
+    this->Add(*item);
 }
