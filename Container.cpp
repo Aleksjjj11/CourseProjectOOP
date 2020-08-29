@@ -30,6 +30,9 @@ Item &Container::operator[](int index) {
 }
 
 void Container::Add(Item &item) {
+    //Если ключ добовляемого элемента уже есть в контейнере, то он не рисваивает
+    if (IsThere(item.GetKey())) return;
+
     if (this->first == nullptr) {
         this->first = this->last = &item;
         item.SetNext(nullptr);
@@ -185,4 +188,16 @@ Container &Container::operator=(Container &value) {
 void Container::Add(std::string key) {
     Item* item = new Item(key);
     this->Add(*item);
+}
+
+bool Container::IsThere(std::string key) {
+    if (first == nullptr) {
+        return false;
+    }
+    for (int i = 0; i < Count(); i++) {
+        if ((*this)[i].GetKey() == key)
+            return true;
+    }
+
+    return false;
 }
