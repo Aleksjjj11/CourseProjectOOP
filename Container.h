@@ -9,8 +9,8 @@ private:
     Item *first;
     Item *last;
     void Swap(Item* item1, Item* item2);
-    bool IsThere(std::string key);
 public:
+    bool IsThere(std::string key);
     void Add(Item &item); //добавление элемента и его ключа
     void Add(std::string key);
     virtual Item &operator [](std::string key); //доступ к эдементу по ключу

@@ -30,8 +30,11 @@ Item &Container::operator[](int index) {
 }
 
 void Container::Add(Item &item) {
-    //Если ключ добовляемого элемента уже есть в контейнере, то он не рисваивает
-    if (IsThere(item.GetKey())) return;
+    //Если ключ добовляемого элемента уже есть в контейнере, то он не присваивает
+    if (IsThere(item.GetKey())) {
+        printf("Element not was added. Element with this key already there.\n");
+        return;
+    }
 
     if (this->first == nullptr) {
         this->first = this->last = &item;
